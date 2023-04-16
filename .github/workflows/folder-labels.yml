@@ -1,4 +1,4 @@
-name: Continuous Integration Pull Request
+name: Set labels
 
 on:
   pull_request:
