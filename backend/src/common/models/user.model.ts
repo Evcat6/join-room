@@ -1,9 +1,27 @@
 import { Model, type RelationMappings } from 'objection';
 
 import { ModelNames } from '../enums/enums';
-import { ChatModel, MessageModel } from './models';
+import { Abstract, ChatModel, MessageModel } from './models';
 
-class UserModel extends Model {
+class UserModel extends Abstract {
+  public 'name': string;
+
+  public 'username': string;
+
+  public 'email': string;
+
+  public 'phoneNumber': string;
+
+  public 'birth': string;
+
+  public 'isPrivate': boolean;
+
+  public 'avatarUrl': string;
+
+  public 'passwordHash': string;
+
+  public 'passwordSalt': string;
+
   public static get tableName(): string {
     return ModelNames.USERS;
   }

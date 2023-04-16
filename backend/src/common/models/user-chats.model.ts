@@ -4,6 +4,12 @@ import { ModelNames } from '../enums/enums';
 import { ChatModel, UserModel } from './models';
 
 class UserChatsModel extends Model {
+  public 'id': string;
+
+  public 'userId': string;
+
+  public 'chatId': string;
+
   public static get tableName(): string {
     return ModelNames.USERS_CHATS;
   }

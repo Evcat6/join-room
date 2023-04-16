@@ -4,6 +4,12 @@ import { ModelNames } from '../enums/enums';
 import { ChatModel, MessageModel } from './models';
 
 class ChatMessagesModel extends Model {
+  public 'id': string;
+
+  public 'chatId': string;
+
+  public 'messageId': string;
+
   public static override get tableName(): string {
     return ModelNames.CHAT_MESSAGES;
   }

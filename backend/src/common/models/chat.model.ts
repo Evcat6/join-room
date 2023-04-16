@@ -1,9 +1,19 @@
 import { Model, type RelationMappings } from 'objection';
 
 import { ModelNames } from '../enums/enums';
-import { MessageModel, UserModel } from './models';
+import { Abstract, MessageModel, UserModel } from './models';
 
-class ChatModel extends Model {
+class ChatModel extends Abstract {
+  public 'chatAdminId': string;
+
+  public 'chatAvatarUrl': string;
+
+  public 'name': string;
+
+  public 'description': string;
+
+  public 'isPrivate': boolean;
+
   public static override get tableName(): string {
     return ModelNames.CHATS;
   }
