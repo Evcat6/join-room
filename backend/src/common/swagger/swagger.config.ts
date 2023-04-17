@@ -2,7 +2,7 @@ import { type Application } from 'express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 
-import { swaggerDefinition } from './swagger-defer';
+import { swaggerDefinition } from './swagger-defer.js';
 
 const options = {
   swaggerDefinition,
@@ -12,7 +12,7 @@ const options = {
 const swaggerSpec = swaggerJsdoc(options);
 
 const swaggerOptions = (app: Application): void => {
-  app.use('/documentation', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 };
 
 export { swaggerOptions };

@@ -1,8 +1,8 @@
 import express from 'express';
 
-import { App } from './app';
-import { config } from './common/config/config';
-import { logger } from './common/logger/logger';
+import { App } from './app.js';
+import { config } from './common/config/config.js';
+import { logger } from './common/logger/logger.js';
 
 const app = express();
 

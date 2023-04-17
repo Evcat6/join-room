@@ -1,7 +1,7 @@
 import { Model, type RelationMappings } from 'objection';
 
-import { ModelNames } from '../enums/enums';
-import { Abstract, MessageModel, UserModel } from './models';
+import { ModelNames } from '../enums/enums.js';
+import { Abstract, MessageModel, UserModel } from './models.js';
 
 class ChatModel extends Abstract {
   public 'chatAdminId': string;

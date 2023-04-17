@@ -1,6 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "lint:type": "npx tsc --noEmit --skipLibCheck",
     "lint:js": "npx eslint \"src/**/*.ts\"",
@@ -9,7 +10,7 @@
     "migrate:dev:make": "node --loader ts-paths-esm-loader ../node_modules/knex/bin/cli.js migrate:make -x ts",
     "migrate:dev:down": "node --loader ts-paths-esm-loader ../node_modules/knex/bin/cli.js migrate:down",
     "migrate:dev:rollback": "node --loader ts-paths-esm-loader ../node_modules/knex/bin/cli.js migrate:rollback --all",
-    "start:dev": "nodemon ./src/server.ts",
+    "start:dev": "nodemon --exec node --loader ts-paths-esm-loader ./src/server.ts",
     "build": "tsc"
   },
   "license": "ISC",
@@ -25,7 +26,7 @@
     "nodemon": "^2.0.22",
     "ts-node": "^10.9.1",
     "ts-paths-esm-loader": "^1.4.1",
-    "typescript": "^5.0.4"
+    "typescript": "5.0.4"
   },
   "dependencies": {
     "@types/convict": "^6.1.1",

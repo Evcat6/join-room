@@ -1,8 +1,14 @@
-import { config } from './src/common/config/config';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+import { config } from './src/common/config/config.js';
 
 const { NAME, PASSWORD, HOST, USER, PORT } = config.DB;
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
   client: 'pg',
   connection: {
     host: HOST,
@@ -16,10 +22,10 @@ module.exports = {
     max: 10,
   },
   migrations: {
-    directory: __dirname + '/src/db/migrations',
+    directory: path.resolve(__dirname, './src/db/migrations'),
     tableName: 'knex_migrations',
   },
   seeds: {
-    directory: __dirname + '/src/db/seeds',
+    directory: path.resolve(__dirname, './src/db/seeds'),
   },
 };

@@ -1,5 +1,5 @@
 enum ROUTES {
-  INIT = 'init',
+  USERS = 'users',
 }
 
 export { ROUTES };

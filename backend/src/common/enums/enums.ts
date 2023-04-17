@@ -1,2 +1,2 @@
-export { ModelNames } from './models.enum';
-export { ROUTES } from './routes.enum';
+export { ModelNames } from './models.enum.js';
+export { ROUTES } from './routes.enum.js';

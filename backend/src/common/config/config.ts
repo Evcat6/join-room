@@ -1,4 +1,4 @@
-import { configSchema } from './config.schema';
+import { configSchema } from './config.schema.js';
 
 const config = configSchema.getProperties();
 

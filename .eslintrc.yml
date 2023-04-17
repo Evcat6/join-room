@@ -37,6 +37,7 @@ rules:
       message: Avoid import/export type { Type } from './module'. Prefer import/export { type Type } from './module'.
   no-console:
     - error
+  '@typescript-eslint/no-misused-promises': off
   max-params:
     - error
     - 3

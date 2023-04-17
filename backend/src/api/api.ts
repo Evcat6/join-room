@@ -1,15 +1,15 @@
 import { type Application, type Router } from 'express';
 
-import { ROUTES } from '../common/enums/enums';
-import { logger } from '../common/logger/logger';
-import { router as initRouter } from './init.api';
+import { ROUTES } from '../common/enums/enums.js';
+import { logger } from '../common/logger/logger.js';
+import { router as usersRouter } from './users.api.js';
 
 type Route = {
   path: string;
   router: Router;
 };
 
-const routes: Route[] = [{ path: ROUTES.INIT, router: initRouter }];
+const routes: Route[] = [{ path: ROUTES.USERS, router: usersRouter }];
 
 const registerRoutes = (app: Application, prefix = '/api'): void => {
   for (const route of routes) {

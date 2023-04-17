@@ -1,7 +1,7 @@
 import convict from 'convict';
 import { config } from 'dotenv';
 
-import { type EnvironmentSchema } from './types/types';
+import { type EnvironmentSchema } from './types/types.js';
 
 config();
 

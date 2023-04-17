@@ -1,5 +1,5 @@
-import { ModelNames } from '../enums/enums';
-import { Abstract } from './abstract.model';
+import { ModelNames } from '../enums/enums.js';
+import { Abstract } from './abstract.model.js';
 
 class ImageModel extends Abstract {
   public 'path': string;

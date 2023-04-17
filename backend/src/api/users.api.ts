@@ -1,0 +1,61 @@
+// eslint-disable-next-line no-restricted-syntax
+import type { Request, Response } from 'express';
+import express from 'express';
+
+import { userService } from '../services/services.js';
+
+const router = express.Router();
+
+/**
+ * @swagger
+ * components:
+ *    schemas:
+ *      UserDto:
+ *        type: object
+ *        properties:
+ *          id:
+ *            type: string
+ *            format: uuid
+ *          email:
+ *            type: string
+ *            format: email
+ *          firstName:
+ *            type: string
+ *          lastName:
+ *            type: string
+ *          phoneNumber:
+ *            type: string
+ *            pattern: '^[+]?[0-9]{1,3}[-]?[0-9]{1,14}$'
+ *          birth:
+ *            type: string
+ *            format: date
+ *          passwordSalt:
+ *            type: string
+ *          passwordHash:
+ *            type: string
+ *          avatarUrl:
+ *            type: string
+ *            format: url
+ */
+
+/**
+ * @swagger
+ * /api/users:
+ *   get:
+ *     summary: Returns list of all users
+ *     description: Returns greeting
+ *     responses:
+ *       200:
+ *         description: A list of all users
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               $ref: '#/components/schemas/UserDto'
+ */
+router.get('/', async (_request: Request, response: Response) => {
+  const users = await userService.findAll();
+  response.send(users);
+});
+
+export { router };
