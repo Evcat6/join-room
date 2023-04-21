@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+}
+
+.input {
+  width: 100%;
+  padding: 7px 8px;
+  border: 2px solid var(--color-gray-500);
+  border-radius: 6px;
+}
+
+.errorMessage {
+  color: var(--color-red-200);
+  font-weight: 300;
+  font-size: 11px;
+}
+
+.label {
+  font-weight: 500;
+  font-size: 15px;
+}
