@@ -1,8 +1,6 @@
-// eslint-disable-next-line no-restricted-syntax
-import type { Request, Response } from 'express';
-import express from 'express';
+import express, { type Request, type Response } from 'express';
 
-import { userService } from '../services/services.js';
+import { userService } from '@/services/services.js';
 
 const router = express.Router();
 
@@ -53,7 +51,7 @@ const router = express.Router();
  *               type: array
  *               $ref: '#/components/schemas/UserDto'
  */
-router.get('/', async (_request: Request, response: Response) => {
+router.get('', async (_request: Request, response: Response) => {
   const users = await userService.findAll();
   response.send(users);
 });

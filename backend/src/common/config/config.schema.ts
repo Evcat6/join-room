@@ -52,6 +52,14 @@ const configSchema = convict<EnvironmentSchema>({
       env: 'DB_PORT',
     },
   },
+  JWT: {
+    SECRET: {
+      doc: 'jwt token secret',
+      format: String,
+      default: null,
+      env: 'JWT_SECRET',
+    },
+  },
 });
 
 configSchema.validate({ allowed: 'strict' });

@@ -1,7 +1,15 @@
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+
+import { config } from '@/common/config/config.js';
 import { userRepository } from '@/repositories/repositories.js';
 
-import { UserService } from './user.service.js';
+import { Crypt } from './crypt/crypt.service.js';
+import { Token } from './token/token.service.js';
+import { User } from './user/user.service.js';
 
-const userService = new UserService(userRepository);
+const cryptService = new Crypt(bcrypt);
+const tokenService = new Token(jwt, config);
+const userService = new User(userRepository, cryptService);
 
-export { userService };
+export { cryptService, tokenService, userService };

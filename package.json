@@ -12,6 +12,7 @@
     "frontend"
   ],
   "scripts": {
+    "shared:build": "npm run build -w shared",
     "lint:type": "npm run lint:type --workspaces --if-present",
     "lint:js": "npm run lint:js --workspaces --if-present -- --max-warnings=0",
     "lint:css": "npm run lint:css --workspaces --if-present",
@@ -42,6 +43,10 @@
     "stylelint-config-standard": "33.0.0",
     "stylelint-order": "6.0.3",
     "ts-node": "^10.9.1",
+    "tsc-alias": "1.8.5",
     "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "2.2.0"
   }
 }

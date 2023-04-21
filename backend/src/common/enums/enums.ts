@@ -1,2 +1,2 @@
 export { ModelNames } from './models.enum.js';
-export { ROUTES } from './routes.enum.js';
+export { ApiRoutes, ExceptionMessage, HttpCode } from 'shared/build/index.js';

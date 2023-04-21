@@ -1,6 +1,8 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { knexSnakeCaseMappers } from 'objection';
+
 import { config } from './src/common/config/config.js';
 
 const { NAME, PASSWORD, HOST, USER, PORT } = config.DB;
@@ -28,4 +30,8 @@ export default {
   seeds: {
     directory: path.resolve(__dirname, './src/db/seeds'),
   },
+  debug: false,
+  ...knexSnakeCaseMappers({
+    underscoreBetweenUppercaseLetters: true,
+  }),
 };

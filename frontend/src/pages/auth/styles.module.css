@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--color-gray-100);
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  width: 400px;
+  padding: 35px;
+  background-color: var(--color-white-100);
+  border-radius: 8px;
+  box-shadow: 0 4.07px 12.23px #00000026;
+}
+
+.title {
+  text-align: center;
+}
+
+.link {
+  color: var(--color-blue-100);
+}

@@ -6,6 +6,7 @@ parserOptions:
   project:
     - ./backend/tsconfig.json
     - ./frontend/tsconfig.json
+    - ./shared/tsconfig.json
 
 settings:
   typescript: true
@@ -25,12 +26,12 @@ plugins:
   - simple-import-sort
 
 rules:
+  unicorn/prefer-spread:
+    - off
   no-restricted-syntax:
     - error
     - selector: SwitchCase > *.consequent[type!="BlockStatement"]
       message: Switch cases without blocks are forbidden.
-    - selector: ExportAllDeclaration,ImportAllDeclaration
-      message: Export/Import all (*) is forbidden.
     - selector: ExportNamedDeclaration[declaration!=null]
       message: Exports should be at the end of the file.
     - selector: ImportDeclaration[importKind=type],ExportNamedDeclaration[exportKind=type]

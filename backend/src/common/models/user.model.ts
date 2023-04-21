@@ -8,7 +8,7 @@ class UserModel extends Abstract {
 
   public 'lastName': string;
 
-  public 'username': string;
+  public 'userName': string;
 
   public 'email': string;
 

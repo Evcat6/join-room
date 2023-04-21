@@ -13,6 +13,24 @@ class UserRepository {
 
     return users.map((it) => UserEntity.initialize(it));
   }
+
+  public async findOne(data: object): Promise<UserEntity | undefined> {
+    const user = await this.userModel.query().where(data).first().execute();
+    if (!user) {
+      return undefined;
+    }
+    return UserEntity.initialize(user);
+  }
+
+  public async create(payload: UserEntity): Promise<UserEntity> {
+    const { email, passwordHash, passwordSalt } = payload.toNewObject();
+    const user = await this.userModel
+      .query()
+      .insert({ email, passwordHash, passwordSalt })
+      .returning('*')
+      .execute();
+    return UserEntity.initialize(user);
+  }
 }
 
 export { UserRepository };

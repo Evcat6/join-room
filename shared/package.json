@@ -1,0 +1,15 @@
+{
+  "name": "shared",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lint:type": "npx tsc --noEmit",
+    "lint:js": "npx eslint \"src/**/*.ts\"",
+    "build": "tsc && tsc-alias"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "joi": "17.9.1"
+  }
+}
