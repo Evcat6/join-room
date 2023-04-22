@@ -21,6 +21,8 @@ const router = express.Router();
  *            type: string
  *          lastName:
  *            type: string
+ *          userName:
+ *            type: string
  *          phoneNumber:
  *            type: string
  *            pattern: '^[+]?[0-9]{1,3}[-]?[0-9]{1,14}$'
@@ -41,7 +43,7 @@ const router = express.Router();
  * /api/users:
  *   get:
  *     summary: Returns list of all users
- *     description: Returns greeting
+ *     description: Returns list of all users
  *     responses:
  *       200:
  *         description: A list of all users
