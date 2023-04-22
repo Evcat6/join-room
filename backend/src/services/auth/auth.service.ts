@@ -1,6 +1,8 @@
 import { ExceptionMessage, HttpCode } from '@/common/enums/enums.js';
 import { HttpError } from '@/common/exceptions/exceptions.js';
 import {
+  type UserSignInRequestDto,
+  type UserSignInResponseDto,
   type UserSignUpRequestDto,
   type UserSignUpResponseDto,
 } from '@/common/types/types.js';
@@ -38,6 +40,16 @@ class Auth {
     }
   }
 
+  public async signIn(
+    userRequestDto: UserSignInRequestDto
+  ): Promise<UserSignInResponseDto> {
+    const { id } = await this.verifySignInCredentials(userRequestDto);
+    const token = this.tokenService.createToken({ id });
+    return {
+      token,
+    };
+  }
+
   private async verifySignUpCredentials(
     requestUser: UserSignUpRequestDto
   ): Promise<boolean> {
@@ -50,6 +62,41 @@ class Auth {
       });
     }
     return true;
+  }
+
+  private async verifySignInCredentials(
+    requestUser: UserSignInRequestDto
+  ): Promise<{
+    id: string;
+    firstName?: string | undefined;
+    lastName?: string | undefined;
+    userName?: string | undefined;
+    email: string;
+    phoneNumber?: string | undefined;
+    birth?: string | undefined;
+    avatarUrl?: string | undefined;
+  }> {
+    const { email, password } = requestUser;
+    const user = await this.userService.findByEmail(email);
+    if (!user) {
+      throw new HttpError({
+        message: ExceptionMessage.INVALID_CREDENTIALS,
+        status: HttpCode.UNAUTHORIZED,
+      });
+    }
+    const userNewObject = user.toNewObject();
+    const userObject = user.toObject();
+    const isEqualPassword = this.cryptService.compareSyncPassword(
+      password,
+      userNewObject.passwordHash
+    );
+    if (!isEqualPassword) {
+      throw new HttpError({
+        message: ExceptionMessage.INVALID_CREDENTIALS,
+        status: HttpCode.UNAUTHORIZED,
+      });
+    }
+    return userObject;
   }
 }
 

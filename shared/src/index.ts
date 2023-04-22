@@ -10,7 +10,12 @@ export {
 } from './enums/enums.js';
 export { HttpError } from './exceptions/exceptions.js';
 export {
+  type UserSignInRequestDto,
+  type UserSignInResponseDto,
   type UserSignUpRequestDto,
   type UserSignUpResponseDto,
 } from './types/types.js';
-export { SignUpValidationSchema } from './validation-schemas/validation-schemas.js';
+export {
+  SignInValidationSchema,
+  SignUpValidationSchema,
+} from './validation-schemas/validation-schemas.js';
