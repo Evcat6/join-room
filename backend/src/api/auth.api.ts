@@ -4,13 +4,15 @@ import express, {
   type Response,
 } from 'express';
 
-import { ApiRoutes, HttpCode } from '@/common/enums/enums.js';
+import { AuthApiPath, HttpCode } from '@/common/enums/enums.js';
+import { HttpError } from '@/common/exceptions/exceptions.js';
+import { getIdFromToken } from '@/common/helpers/helpers.js';
 import { validateSchema } from '@/common/middlewares/middlewares.js';
 import {
   SignInValidationSchema,
   SignUpValidationSchema,
 } from '@/common/validation-schemas/validation-schemas.js';
-import { authService } from '@/services/services.js';
+import { authService, userService } from '@/services/services.js';
 
 const router = express.Router();
 
@@ -57,6 +59,16 @@ const router = express.Router();
 
 /**
  * @swagger
+ * components:
+ *  securitySchemes:
+ *    BearerAuth:
+ *      type: http
+ *      scheme: bearer
+ *      bearerFormat: JWT
+ */
+
+/**
+ * @swagger
  * /api/auth/sign-up:
  *   post:
  *     requestBody:
@@ -78,7 +90,7 @@ const router = express.Router();
  *               $ref: '#/components/schemas/AuthResponseDto'
  */
 router.post(
-  ApiRoutes.SIGN_UP,
+  AuthApiPath.SIGN_UP,
   validateSchema(SignUpValidationSchema),
   async (request: Request, response: Response, next: NextFunction) => {
     try {
@@ -113,12 +125,47 @@ router.post(
  *               $ref: '#/components/schemas/AuthResponseDto'
  */
 router.post(
-  ApiRoutes.SIGN_IN,
+  AuthApiPath.SIGN_IN,
   validateSchema(SignInValidationSchema),
   async (request: Request, response: Response, next: NextFunction) => {
     try {
       const token = await authService.signIn(request.body);
       response.status(HttpCode.OK).send(token);
+    } catch (error: unknown) {
+      next(error);
+    }
+  }
+);
+
+/**
+ * @swagger
+ * /api/auth/user:
+ *   get:
+ *     summary: Returns current user details
+ *     description: Returns current user details
+ *     security:
+ *       - BearerAuth: []
+ *     responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               $ref: '#/components/schemas/UserDto'
+ */
+router.get(
+  AuthApiPath.USER,
+  async (request: Request, response: Response, next: NextFunction) => {
+    try {
+      const { id } = getIdFromToken(request.headers.authorization as string);
+      const user = await userService.findById(id);
+      if (!user) {
+        throw new HttpError({
+          status: HttpCode.NOT_FOUND,
+          message: 'User Not Found',
+        });
+      }
+      response.status(HttpCode.OK).send(user);
     } catch (error: unknown) {
       next(error);
     }

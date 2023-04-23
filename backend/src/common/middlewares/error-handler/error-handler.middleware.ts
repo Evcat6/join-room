@@ -11,9 +11,9 @@ function errorMiddleware(
   next: NextFunction
 ): void {
   if (!response.headersSent) {
-    response.status(error.status).json({
+    response.status(error.status ?? HttpCode.INTERNAL_SERVER_ERROR).json({
       message: error.message,
-      status: error.status,
+      status: error.status ?? HttpCode.INTERNAL_SERVER_ERROR,
     });
     return next(error);
   }

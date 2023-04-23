@@ -1,5 +1,6 @@
 import express, { type Request, type Response } from 'express';
 
+import { UsersApiPath } from '@/common/enums/enums.js';
 import { userService } from '@/services/services.js';
 
 const router = express.Router();
@@ -44,6 +45,8 @@ const router = express.Router();
  *   get:
  *     summary: Returns list of all users
  *     description: Returns list of all users
+ *     security:
+ *       - BearerAuth: []
  *     responses:
  *       200:
  *         description: A list of all users
@@ -53,9 +56,28 @@ const router = express.Router();
  *               type: array
  *               $ref: '#/components/schemas/UserDto'
  */
-router.get('', async (_request: Request, response: Response) => {
-  const users = await userService.findAll();
-  response.send(users);
-});
+router.get(
+  UsersApiPath.INDEX,
+  async (_request: Request, response: Response) => {
+    const users = await userService.findAll();
+    response.send(users);
+  }
+);
+
+/**
+ * @swagger
+ * /api/users:
+ *   get:
+ *     summary: Returns user info by id
+ *     description: Returns user info by id
+ *     responses:
+ *       200:
+ *         description: user info by id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: Object
+ *               $ref: '#/components/schemas/UserDto'
+ */
 
 export { router };

@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { StorageKey } from '@/common/enums/storage-key.enum';
 import {
+  type UserLoadResponseDto,
   type UserSignInRequestDto,
   type UserSignUpRequestDto,
 } from '@/common/types/types';
@@ -13,7 +14,7 @@ const signUp = createAsyncThunk<
   Promise<void>,
   UserSignUpRequestDto,
   AsyncThunkConfig
->(ActionTypes.SIGN_UP, async (payload, { extra: { services } }) => {
+>(ActionTypes.SIGN_UP, async (payload, { dispatch, extra: { services } }) => {
   const { authApi, notification, storage } = services;
 
   const { token } = await authApi.signUp(payload);
@@ -21,13 +22,14 @@ const signUp = createAsyncThunk<
   storage.set(StorageKey.TOKEN, token);
 
   notification.success('You are successfully signed up');
+  await dispatch(loadUser());
 });
 
 const signIn = createAsyncThunk<
   Promise<void>,
   UserSignInRequestDto,
   AsyncThunkConfig
->(ActionTypes.SIGN_UP, async (payload, { extra: { services } }) => {
+>(ActionTypes.SIGN_IN, async (payload, { dispatch, extra: { services } }) => {
   const { authApi, notification, storage } = services;
 
   const { token } = await authApi.signIn(payload);
@@ -35,6 +37,16 @@ const signIn = createAsyncThunk<
   storage.set(StorageKey.TOKEN, token);
 
   notification.success('You are successfully authorized');
+  await dispatch(loadUser());
 });
 
-export { signIn, signUp };
+const loadUser = createAsyncThunk<
+  UserLoadResponseDto,
+  undefined,
+  AsyncThunkConfig
+>(ActionTypes.LOAD, async (_, { extra: { services } }) => {
+  const { authApi } = services;
+  return await authApi.load();
+});
+
+export { loadUser, signIn, signUp };

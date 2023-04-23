@@ -13,7 +13,11 @@ import { type Logger } from 'winston';
 import knexConfig from '../knexfile.js';
 import { registerRoutes } from './api/api.js';
 import { type config as Config } from './common/config/config.js';
-import { errorMiddleware, notFound } from './common/middlewares/middlewares.js';
+import {
+  authorization,
+  errorMiddleware,
+  notFound,
+} from './common/middlewares/middlewares.js';
 import { swaggerOptions } from './common/swagger/swagger.config.js';
 import { type AppConstructor } from './common/types/types.js';
 import { socketEventsHandler } from './socket/socket.events.js';
@@ -37,6 +41,8 @@ class App {
     this.app.use(methodOverride());
 
     this.app.use(cors());
+
+    this.app.use(authorization);
 
     this.app.use(
       morgan('combined', {
