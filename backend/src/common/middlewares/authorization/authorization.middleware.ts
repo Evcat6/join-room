@@ -21,7 +21,7 @@ const authorization = (
     );
 
     if (isWhiteRoute) {
-      next();
+      return next();
     }
 
     if (!request.headers.authorization) {

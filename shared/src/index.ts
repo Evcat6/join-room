@@ -12,6 +12,7 @@ export {
 } from './enums/enums.js';
 export { HttpError } from './exceptions/exceptions.js';
 export {
+  type UserLoadResponseDto,
   type UserSignInRequestDto,
   type UserSignInResponseDto,
   type UserSignUpRequestDto,

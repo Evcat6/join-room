@@ -45,6 +45,8 @@ const router = express.Router();
  *   get:
  *     summary: Returns list of all users
  *     description: Returns list of all users
+ *     security:
+ *       - BearerAuth: []
  *     responses:
  *       200:
  *         description: A list of all users

@@ -1,1 +1,6 @@
-export { FormButton, FormInput } from './common/common';
+export {
+  FormButton,
+  FormInput,
+  PrivateRoute,
+  PublicRoute,
+} from './common/common';

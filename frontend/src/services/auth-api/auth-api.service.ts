@@ -1,5 +1,6 @@
 import { AuthApiPath, HttpMethod } from '@/common/enums/enums';
 import {
+  type UserLoadResponseDto,
   type UserSignInRequestDto,
   type UserSignInResponseDto,
   type UserSignUpRequestDto,
@@ -49,6 +50,18 @@ class AuthApi {
     );
 
     return await response.json<UserSignUpResponseDto>();
+  }
+
+  public async load(): Promise<UserLoadResponseDto> {
+    const response = await this.http.load(
+      `${this.baseUrl}${this.path}${AuthApiPath.USER}`,
+      {
+        method: HttpMethod.GET,
+        hasAuth: true,
+      }
+    );
+
+    return await response.json<UserLoadResponseDto>();
   }
 }
 

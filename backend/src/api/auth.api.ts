@@ -59,6 +59,16 @@ const router = express.Router();
 
 /**
  * @swagger
+ * components:
+ *  securitySchemes:
+ *    BearerAuth:
+ *      type: http
+ *      scheme: bearer
+ *      bearerFormat: JWT
+ */
+
+/**
+ * @swagger
  * /api/auth/sign-up:
  *   post:
  *     requestBody:
@@ -127,6 +137,22 @@ router.post(
   }
 );
 
+/**
+ * @swagger
+ * /api/auth/user:
+ *   get:
+ *     summary: Returns current user details
+ *     description: Returns current user details
+ *     security:
+ *       - BearerAuth: []
+ *     responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               $ref: '#/components/schemas/UserDto'
+ */
 router.get(
   AuthApiPath.USER,
   async (request: Request, response: Response, next: NextFunction) => {
