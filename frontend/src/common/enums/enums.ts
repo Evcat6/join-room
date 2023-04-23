@@ -5,7 +5,8 @@ export { DataStatus } from './data-status.enum';
 export { InputType } from './input-type.enum';
 export { StorageKey } from './storage-key.enum';
 export {
-  ApiRoutes,
+  ApiPath,
+  AuthApiPath,
   ContentType,
   HttpCode,
   HttpHeader,

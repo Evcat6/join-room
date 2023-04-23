@@ -1,4 +1,4 @@
-import { ApiRoutes, HttpMethod } from '@/common/enums/enums';
+import { AuthApiPath, HttpMethod } from '@/common/enums/enums';
 import {
   type UserSignInRequestDto,
   type UserSignInResponseDto,
@@ -25,7 +25,7 @@ class AuthApi {
     payload: UserSignUpRequestDto
   ): Promise<UserSignUpResponseDto> {
     const response = await this.http.load(
-      `${this.baseUrl}${this.path}${ApiRoutes.SIGN_UP}`,
+      `${this.baseUrl}${this.path}${AuthApiPath.SIGN_UP}`,
       {
         method: HttpMethod.POST,
         hasAuth: false,
@@ -40,7 +40,7 @@ class AuthApi {
     payload: UserSignInRequestDto
   ): Promise<UserSignInResponseDto> {
     const response = await this.http.load(
-      `${this.baseUrl}${this.path}${ApiRoutes.SIGN_IN}`,
+      `${this.baseUrl}${this.path}${AuthApiPath.SIGN_IN}`,
       {
         method: HttpMethod.POST,
         hasAuth: false,

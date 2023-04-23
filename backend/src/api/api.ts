@@ -1,6 +1,6 @@
 import { type Application } from 'express';
 
-import { ApiRoutes } from '@/common/enums/enums.js';
+import { ApiPath } from '@/common/enums/enums.js';
 import { logger } from '@/common/logger/logger.js';
 import { type ApiRoute } from '@/common/types/types.js';
 
@@ -8,8 +8,8 @@ import { router as authRouter } from './auth.api.js';
 import { router as usersRouter } from './users.api.js';
 
 const routes: ApiRoute[] = [
-  { path: ApiRoutes.USERS, router: usersRouter },
-  { path: ApiRoutes.AUTH, router: authRouter },
+  { path: ApiPath.USERS, router: usersRouter },
+  { path: ApiPath.AUTH, router: authRouter },
 ];
 
 const registerRoutes = (app: Application, prefix = '/api'): void => {

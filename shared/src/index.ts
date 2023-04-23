@@ -1,11 +1,13 @@
 export {
-  ApiRoutes,
+  ApiPath,
+  AuthApiPath,
   ContentType,
   ExceptionMessage,
   ExceptionName,
   HttpCode,
   HttpHeader,
   HttpMethod,
+  UsersApiPath,
   UserValidationMessage,
 } from './enums/enums.js';
 export { HttpError } from './exceptions/exceptions.js';
