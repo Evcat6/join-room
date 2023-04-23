@@ -22,6 +22,8 @@ const router = express.Router();
  *            type: string
  *          lastName:
  *            type: string
+ *          userName:
+ *            type: string
  *          phoneNumber:
  *            type: string
  *            pattern: '^[+]?[0-9]{1,3}[-]?[0-9]{1,14}$'
