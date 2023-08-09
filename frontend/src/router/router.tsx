@@ -4,7 +4,7 @@ import { PrivateRoute, PublicRoute } from '@/components/components';
 
 import { App } from '../app/app';
 import { AppRoute } from '../common/enums/enums';
-import { Auth, Home } from '../pages/pages';
+import { Auth, Home, RoomInvite } from '../pages/pages';
 
 const AppRouter: React.FC = () => {
   return (
@@ -36,9 +36,18 @@ const AppRouter: React.FC = () => {
             }
           />
           <Route
+            path={AppRoute.HOME_$ROOM_ID}
+            element={
+              <PrivateRoute>
+                <Home />
+              </PrivateRoute>
+            }
+          />
+          <Route
             path={AppRoute.ROOT}
             element={<Navigate to={AppRoute.HOME} />}
           />
+          <Route path={AppRoute.ROOM_$ID} element={<RoomInvite />} />
         </Route>
       </Routes>
     </BrowserRouter>

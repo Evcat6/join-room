@@ -1,9 +1,8 @@
 enum ApiPath {
   USERS = '/users',
-  SIGN_UP = '/sign-up',
-  SIGN_IN = '/sign-in',
   AUTH = '/auth',
-  LOAD = '/load',
+  USER_CHATS = '/user/chats',
+  CHAT_MESSAGES = '/chat/messages',
 }
 
 export { ApiPath };

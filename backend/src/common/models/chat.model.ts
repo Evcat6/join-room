@@ -1,6 +1,7 @@
 import { Model, type RelationMappings } from 'objection';
 
 import { ModelNames } from '../enums/enums.js';
+import { getRandomPastelHexColor } from '../helpers/helpers.js';
 import { Abstract, MessageModel, UserModel } from './models.js';
 
 class ChatModel extends Abstract {
@@ -14,8 +15,20 @@ class ChatModel extends Abstract {
 
   public 'isPrivate': boolean;
 
+  public 'defaultBackgroundColor': string;
+
+  public 'messages': MessageModel[];
+
   public static override get tableName(): string {
     return ModelNames.CHATS;
+  }
+
+  public override $beforeInsert(): void {
+    const insertDate = new Date().toISOString();
+
+    this.createdAt = insertDate;
+    this.updatedAt = insertDate;
+    this.defaultBackgroundColor = getRandomPastelHexColor();
   }
 
   public static override relationMappings = (): RelationMappings => ({

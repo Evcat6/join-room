@@ -24,6 +24,8 @@ class UserModel extends Abstract {
 
   public 'passwordSalt': string;
 
+  public 'chats': ChatModel[];
+
   public static get tableName(): string {
     return ModelNames.USERS;
   }

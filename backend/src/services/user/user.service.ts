@@ -1,5 +1,9 @@
 import { UserEntity } from '@/common/entities/user.entity.js';
-import { type UserSignUpRequestDto } from '@/common/types/types';
+import {
+  type UserDeleteRequestDto,
+  type UserDeleteResponseDto,
+  type UserSignUpRequestDto,
+} from '@/common/types/types.js';
 import { type UserRepository } from '@/repositories/user.repository.js';
 
 import { type Crypt } from '../crypt/crypt.service';
@@ -38,6 +42,13 @@ class User {
         passwordHash: hash,
       })
     );
+  }
+
+  public async delete(
+    payload: UserDeleteRequestDto
+  ): Promise<UserDeleteResponseDto> {
+    const { id } = payload;
+    return await this.userRepository.deleteOne(id);
   }
 }
 

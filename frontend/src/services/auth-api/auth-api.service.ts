@@ -6,20 +6,13 @@ import {
   type UserSignUpRequestDto,
   type UserSignUpResponseDto,
 } from '@/common/types/types';
+import { AbstractApi } from '@/services/abstract-api/abstract-api.service';
 
 import { type Http } from '../http/http.service';
 
-class AuthApi {
-  private baseUrl: string;
-
-  private path: string;
-
-  private http: Http;
-
+class AuthApi extends AbstractApi {
   public constructor(baseUrl: string, path: string, http: Http) {
-    this.baseUrl = baseUrl;
-    this.http = http;
-    this.path = path;
+    super(baseUrl, path, http);
   }
 
   public async signUp(

@@ -3,14 +3,29 @@ import { type NextFunction, type Request, type Response } from 'express';
 import { WHITE_ROUTES } from '@/common/constants/constants.js';
 import { HttpCode } from '@/common/enums/enums.js';
 import { HttpError } from '@/common/exceptions/exceptions.js';
-import { getToken } from '@/common/helpers/helpers.js';
+import { getIdFromToken, getToken } from '@/common/helpers/helpers.js';
+
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace Express {
+    interface Request {
+      userId: string;
+    }
+  }
+}
 
 const authorization = (
   request: Request,
-  response: Response,
+  _response: Response,
   next: NextFunction
 ): void => {
   try {
+    const isDocumentationRoute = request.path.includes('/api-docs');
+
+    if (isDocumentationRoute) {
+      return next();
+    }
+
     const routeConfig = {
       path: request.path,
       method: request.method,
@@ -33,7 +48,9 @@ const authorization = (
 
     const token = getToken(request.headers.authorization);
 
-    request.headers.authorization = token;
+    const { id } = getIdFromToken(token);
+
+    request.userId = id;
 
     next();
   } catch (error: unknown) {

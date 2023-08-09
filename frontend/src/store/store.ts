@@ -5,8 +5,10 @@ import { AppEnvironment } from '@/common/enums/enums';
 
 import {
   authApi,
+  chatMessagesApi,
   notificationService as notification,
   storageService as storage,
+  userChatsApi,
 } from '../services/services';
 import { handleError } from './middlewares/middlewares';
 import { rootReducer } from './root-reducer';
@@ -16,6 +18,8 @@ const extraArgument = {
     notification,
     authApi,
     storage,
+    userChatsApi,
+    chatMessagesApi,
   },
 };
 
