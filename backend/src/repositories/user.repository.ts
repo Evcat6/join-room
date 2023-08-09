@@ -1,5 +1,6 @@
 import { UserEntity } from '@/common/entities/user.entity.js';
 import { type UserModel } from '@/common/models/models.js';
+import { type UserDeleteResponseDto } from '@/common/types/types.js';
 
 class UserRepository {
   private userModel: typeof UserModel;
@@ -30,6 +31,11 @@ class UserRepository {
       .returning('*')
       .execute();
     return UserEntity.initialize(user);
+  }
+
+  public async deleteOne(id: string): Promise<UserDeleteResponseDto> {
+    await this.userModel.query().deleteById(id).execute();
+    return { id };
   }
 }
 

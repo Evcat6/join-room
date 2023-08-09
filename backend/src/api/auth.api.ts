@@ -6,7 +6,6 @@ import express, {
 
 import { AuthApiPath, HttpCode } from '@/common/enums/enums.js';
 import { HttpError } from '@/common/exceptions/exceptions.js';
-import { getIdFromToken } from '@/common/helpers/helpers.js';
 import { validateSchema } from '@/common/middlewares/middlewares.js';
 import {
   SignInValidationSchema,
@@ -157,8 +156,8 @@ router.get(
   AuthApiPath.USER,
   async (request: Request, response: Response, next: NextFunction) => {
     try {
-      const { id } = getIdFromToken(request.headers.authorization as string);
-      const user = await userService.findById(id);
+      const { userId } = request;
+      const user = await userService.findById(userId);
       if (!user) {
         throw new HttpError({
           status: HttpCode.NOT_FOUND,

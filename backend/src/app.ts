@@ -2,7 +2,12 @@ import http from 'node:http';
 
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import { type Application } from 'express';
+import {
+  type Application,
+  type NextFunction,
+  type Request,
+  type Response,
+} from 'express';
 import Knex from 'knex';
 import methodOverride from 'method-override';
 import morgan from 'morgan';
@@ -17,10 +22,10 @@ import {
   authorization,
   errorMiddleware,
   notFound,
+  socketInjector,
 } from './common/middlewares/middlewares.js';
 import { swaggerOptions } from './common/swagger/swagger.config.js';
 import { type AppConstructor } from './common/types/types.js';
-import { socketEventsHandler } from './socket/socket.events.js';
 
 class App {
   private app: Application;
@@ -42,7 +47,9 @@ class App {
 
     this.app.use(cors());
 
-    this.app.use(authorization);
+    this.app.use((request: Request, response: Response, next: NextFunction) =>
+      authorization(request, response, next)
+    );
 
     this.app.use(
       morgan('combined', {
@@ -59,7 +66,8 @@ class App {
     this.logger.info('Connecting webSockets...');
     const server = http.createServer(this.app);
     const io: Server = new Server(server);
-    socketEventsHandler(io);
+    const socket = socketInjector(io);
+    this.app.use(socket);
   }
 
   private initApi(): void {

@@ -1,1 +1,5 @@
-export { SignInValidationSchema, SignUpValidationSchema } from 'shared/build';
+export {
+  CreateChatValidationSchema,
+  SignInValidationSchema,
+  SignUpValidationSchema,
+} from 'shared/build';

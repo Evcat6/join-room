@@ -41,6 +41,18 @@ const router = express.Router();
 
 /**
  * @swagger
+ * components:
+ *    schemas:
+ *      DeleteUserResponseDto:
+ *        type: object
+ *        properties:
+ *          id:
+ *            type: string
+ *            format: uuid
+ */
+
+/**
+ * @swagger
  * /api/users:
  *   get:
  *     summary: Returns list of all users
@@ -67,17 +79,28 @@ router.get(
 /**
  * @swagger
  * /api/users:
- *   get:
- *     summary: Returns user info by id
- *     description: Returns user info by id
+ *   delete:
+ *     summary: Delete user and return id
+ *     description: Delete user and return id
+ *     security:
+ *       - BearerAuth: []
  *     responses:
  *       200:
- *         description: user info by id
+ *         description: user id
  *         content:
  *           application/json:
  *             schema:
- *               type: Object
- *               $ref: '#/components/schemas/UserDto'
+ *               type: array
+ *               $ref: '#/components/schemas/DeleteUserResponseDto'
  */
+
+router.delete(
+  UsersApiPath.INDEX,
+  async (request: Request, response: Response) => {
+    const { userId } = request;
+    const { id } = await userService.delete({ id: userId });
+    response.send({ id });
+  }
+);
 
 export { router };

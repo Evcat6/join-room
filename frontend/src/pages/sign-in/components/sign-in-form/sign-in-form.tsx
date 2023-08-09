@@ -8,11 +8,6 @@ import { FormButton, FormInput } from '@/components/components';
 
 import styles from './styles.module.css';
 
-type FormData = {
-  email: string;
-  password: string;
-};
-
 type Properties = {
   onSubmit: (payload: UserSignInRequestDto) => void;
 };
@@ -22,7 +17,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>({
+  } = useForm<UserSignInRequestDto>({
     mode: 'onBlur',
     resolver: joiResolver(SignInValidationSchema),
   });
