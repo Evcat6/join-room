@@ -29,4 +29,12 @@ const createMessage = createAsyncThunk<
   return await chatMessagesApi.create(payload);
 });
 
-export { createMessage, loadMessages };
+const addNewMessage = createAsyncThunk<
+  ChatMessageGetResponseDto,
+  ChatMessageGetResponseDto,
+  AsyncThunkConfig
+>(ActionTypes.ADD_NEW_MESSAGE, (payload) => {
+  return payload;
+});
+
+export { addNewMessage, createMessage, loadMessages };

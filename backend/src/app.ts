@@ -31,11 +31,20 @@ class App {
   private app: Application;
   private config: typeof Config;
   private logger: Logger;
+  private io: Server;
+  private server: http.Server;
 
   public constructor({ app, config, logger }: AppConstructor) {
     this.app = app;
     this.config = config;
     this.logger = logger;
+    this.server = http.createServer(this.app);
+    this.io = new Server(this.server, {
+      cors: {
+        origin: '*',
+        methods: ['GET', 'POST'],
+      },
+    });
   }
 
   private initMiddleware(): void {
@@ -64,19 +73,17 @@ class App {
 
   private connectSocket(): void {
     this.logger.info('Connecting webSockets...');
-    const server = http.createServer(this.app);
-    const io: Server = new Server(server);
-    const socket = socketInjector(io);
-    this.app.use(socket);
+
+    this.app.use(socketInjector(this.io));
   }
 
   private initApi(): void {
     this.logger.info('Generating API documentation...');
     swaggerOptions(this.app);
 
-    registerRoutes(this.app, '/api');
-
     this.connectSocket();
+
+    registerRoutes(this.app, '/api');
   }
 
   private notFoundHandler(): void {
@@ -94,13 +101,13 @@ class App {
 
     this.initMiddleware();
 
-    this.initApi();
-
     this.initErrorHandler();
+
+    this.initApi();
 
     this.notFoundHandler();
 
-    this.app.listen(this.config.APP.PORT, () => {
+    this.server.listen(this.config.APP.PORT, () => {
       this.logger.info(
         `Application is listening on PORT - ${this.config.APP.PORT}`
       );

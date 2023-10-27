@@ -8,6 +8,7 @@ import {
   chatMessagesApi,
   notificationService as notification,
   storageService as storage,
+  userApi,
   userChatsApi,
 } from '../services/services';
 import { handleError } from './middlewares/middlewares';
@@ -20,6 +21,7 @@ const extraArgument = {
     storage,
     userChatsApi,
     chatMessagesApi,
+    userApi,
   },
 };
 

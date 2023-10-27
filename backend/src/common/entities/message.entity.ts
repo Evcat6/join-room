@@ -9,21 +9,31 @@ class MessageEntity implements IEntity {
 
   private 'imageUrl'?: string;
 
+  private 'createdAt': string | null;
+
+  private 'updatedAt': string | null;
+
   private constructor({
     id,
     userId,
     text,
     imageUrl,
+    createdAt,
+    updatedAt,
   }: {
     id: string | null;
     userId: string;
     text?: string;
     imageUrl?: string;
+    createdAt: string | null;
+    updatedAt: string | null;
   }) {
     this.id = id;
     this.userId = userId;
     this.text = text;
     this.imageUrl = imageUrl;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
   }
 
   public static initialize({
@@ -31,17 +41,23 @@ class MessageEntity implements IEntity {
     userId,
     text,
     imageUrl,
+    createdAt,
+    updatedAt,
   }: {
     id: string | null;
     userId: string;
     text?: string;
     imageUrl?: string;
+    createdAt: string;
+    updatedAt: string;
   }): MessageEntity {
     return new MessageEntity({
       id,
       userId,
       text,
       imageUrl,
+      createdAt,
+      updatedAt,
     });
   }
 
@@ -59,6 +75,8 @@ class MessageEntity implements IEntity {
       userId,
       text,
       imageUrl,
+      createdAt: null,
+      updatedAt: null,
     });
   }
 
@@ -67,12 +85,16 @@ class MessageEntity implements IEntity {
     userId: string;
     text?: string;
     imageUrl?: string;
+    createdAt: string;
+    updatedAt: string;
   } {
     return {
       id: this.id as string,
       userId: this.userId,
       text: this.text,
       imageUrl: this.imageUrl,
+      createdAt: this.createdAt as string,
+      updatedAt: this.updatedAt as string,
     };
   }
 

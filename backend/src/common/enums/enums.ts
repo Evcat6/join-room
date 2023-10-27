@@ -5,6 +5,7 @@ export {
   ChatMessageApiPath,
   ExceptionMessage,
   HttpCode,
+  SocketEvent,
   UserChatsApiPath,
   UsersApiPath,
 } from 'shared/build/index.js';

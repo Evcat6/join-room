@@ -1,0 +1,17 @@
+
+.message {
+    padding: 18px;
+    border-radius: 28px;
+}
+
+.message.userMessage {
+    align-self: flex-end;
+    color: var(--color-white-100);
+    background-color: var(--color-blue-100);
+}
+
+.message.notUserMessage {
+    align-self: flex-start;
+    color: var(--color-black-100);
+    background-color: var(--color-gray-100);
+}

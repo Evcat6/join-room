@@ -12,18 +12,18 @@ import {
   useEffect,
 } from '@/common/hooks/hooks';
 import { storageService } from '@/services/services';
-import { authActions } from '@/store/actions';
+import { userActions } from '@/store/actions';
 
 library.add(icons);
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { isUserLoaded } = useAppSelector((state) => state.auth);
+  const { isUserLoaded } = useAppSelector((state) => state.user);
   const token = storageService.get(StorageKey.TOKEN);
 
   useEffect(() => {
     if (!isUserLoaded && token) {
-      void dispatch(authActions.loadUser());
+      void dispatch(userActions.load());
     }
   }, [dispatch, isUserLoaded, token]);
   return (

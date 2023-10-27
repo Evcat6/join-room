@@ -3,7 +3,7 @@ import { createReducer, isAnyOf } from '@reduxjs/toolkit';
 import { DataStatus } from '@/common/enums/enums';
 import { type ChatMessageGetResponseDto } from '@/common/types/types';
 
-import { createMessage, loadMessages } from './actions';
+import { addNewMessage, createMessage, loadMessages } from './actions';
 
 type InitialState = {
   dataStatus: DataStatus;
@@ -18,6 +18,10 @@ const initialState: InitialState = {
 const reducer = createReducer(initialState, (builder) => {
   builder.addCase(loadMessages.fulfilled, (state, action) => {
     state.messages = action.payload;
+  });
+
+  builder.addCase(addNewMessage.fulfilled, (state, action) => {
+    state.messages.push(action.payload);
   });
 
   builder.addMatcher(

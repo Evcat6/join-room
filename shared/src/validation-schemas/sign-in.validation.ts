@@ -8,11 +8,11 @@ const emailRegExp = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
 const signIn = joi.object<UserSignInRequestDto, true>({
   email: joi.string().pattern(emailRegExp).required().messages({
-    'string.empty': UserValidationMessage.EMAIL_REQUIRE,
+    'string.empty': UserValidationMessage.EMAIL_REQUIRED,
     'string.pattern.base': UserValidationMessage.EMAIL_WRONG,
   }),
   password: joi.string().trim().min(8).max(20).required().messages({
-    'string.empty': UserValidationMessage.PASSWORD_REQUIRE,
+    'string.empty': UserValidationMessage.PASSWORD_REQUIRED,
     'string.min': UserValidationMessage.PASSWORD_MIN,
     'string.max': UserValidationMessage.PASSWORD_MAX,
   }),

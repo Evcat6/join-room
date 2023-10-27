@@ -23,6 +23,13 @@ jobs:
         with:
           node-version-file: .nvmrc
 
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with: |
+          node_modules
+          frontend/node_modules
+          backend/node_modules
+
       - name: Install Dependencies
         run: |
           npm install

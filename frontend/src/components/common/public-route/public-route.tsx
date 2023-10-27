@@ -8,8 +8,8 @@ type Properties = {
   children: JSX.Element;
 };
 
-const PublicRoute = ({ children }: Properties): JSX.Element => {
-  const { isUserLoaded, dataStatus } = useAppSelector((state) => state.auth);
+const PublicRoute: React.FC<Properties> = ({ children }) => {
+  const { isUserLoaded, dataStatus } = useAppSelector((state) => state.user);
   const token = storageService.get(StorageKey.TOKEN);
   if (!isUserLoaded && dataStatus === DataStatus.PENDING) {
     return <h1>Loading...</h1>;

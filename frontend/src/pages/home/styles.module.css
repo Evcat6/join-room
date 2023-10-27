@@ -16,9 +16,16 @@
 }
 
 .chatsContainer {
+    position: relative;
     width: 350px;
 }
 
 .chatContainer {
     width: 100%;
+}
+
+.createChatButtonContainer {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
 }

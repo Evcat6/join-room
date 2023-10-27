@@ -1,18 +1,18 @@
 import { type UserChatGetResponseDto } from 'shared/build';
 
-import { ChatItem } from '../components';
+import { RoomItem } from '../components';
 import styles from './styles.module.css';
 
 type Properties = {
   chatsArray: UserChatGetResponseDto[];
 };
 
-const ChatList: React.FC<Properties> = ({ chatsArray }) => {
+const RoomList: React.FC<Properties> = ({ chatsArray }) => {
   return (
     <ul className={styles.container}>
       {chatsArray.length > 0
         ? chatsArray.map((chat) => (
-            <ChatItem
+            <RoomItem
               id={chat.id}
               key={chat.id}
               name={chat.name}
@@ -25,4 +25,4 @@ const ChatList: React.FC<Properties> = ({ chatsArray }) => {
   );
 };
 
-export { ChatList };
+export { RoomList };

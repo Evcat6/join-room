@@ -1,6 +1,9 @@
 import { UserEntity } from '@/common/entities/user.entity.js';
 import { type UserModel } from '@/common/models/models.js';
-import { type UserDeleteResponseDto } from '@/common/types/types.js';
+import {
+  type UserDeleteResponseDto,
+  type UserUpdateRequestDto,
+} from '@/common/types/types.js';
 
 class UserRepository {
   private userModel: typeof UserModel;
@@ -36,6 +39,19 @@ class UserRepository {
   public async deleteOne(id: string): Promise<UserDeleteResponseDto> {
     await this.userModel.query().deleteById(id).execute();
     return { id };
+  }
+
+  public async updateOne(
+    id: string,
+    payload: UserUpdateRequestDto
+  ): Promise<UserEntity> {
+    const [updatedUser] = await this.userModel
+      .query()
+      .update(payload)
+      .where({ id })
+      .returning('*')
+      .execute();
+    return UserEntity.initialize(updatedUser);
   }
 }
 

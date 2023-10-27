@@ -150,7 +150,7 @@ router.post(
  *           application/json:
  *             schema:
  *               type: object
- *               $ref: '#/components/schemas/UserDto'
+ *               $ref: '#/components/schemas/CurrentUserDto'
  */
 router.get(
   AuthApiPath.USER,
@@ -164,7 +164,10 @@ router.get(
           message: 'User Not Found',
         });
       }
-      response.status(HttpCode.OK).send(user);
+      const userObject = user.toObject();
+      const isFullyRegistered = userService.isFullyRegistered(userObject);
+      const payload = { ...userObject, isFullyRegistered };
+      response.status(HttpCode.OK).send(payload);
     } catch (error: unknown) {
       next(error);
     }

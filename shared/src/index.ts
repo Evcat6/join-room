@@ -8,6 +8,7 @@ export {
   HttpCode,
   HttpHeader,
   HttpMethod,
+  SocketEvent,
   UserChatsApiPath,
   UsersApiPath,
   UserValidationMessage,
@@ -17,6 +18,7 @@ export {
   type ChatMessageCreateRequestDto,
   type ChatMessageCreateResponseDto,
   type ChatMessageGetResponseDto,
+  type CurrentUserLoadResponseDto,
   type UserChatCreateRequestDto,
   type UserChatCreateResponseDto,
   type UserChatGetResponseDto,
@@ -27,9 +29,11 @@ export {
   type UserSignInResponseDto,
   type UserSignUpRequestDto,
   type UserSignUpResponseDto,
+  type UserUpdateRequestDto,
 } from './types/types.js';
 export {
   CreateChatValidationSchema,
   SignInValidationSchema,
   SignUpValidationSchema,
+  UserUpdateValidationSchema,
 } from './validation-schemas/validation-schemas.js';

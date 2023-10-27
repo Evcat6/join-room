@@ -22,6 +22,10 @@ const authorization = (
   try {
     const isDocumentationRoute = request.path.includes('/api-docs');
 
+    if (request.url.startsWith('/socket.io/')) {
+      return next();
+    }
+
     if (isDocumentationRoute) {
       return next();
     }

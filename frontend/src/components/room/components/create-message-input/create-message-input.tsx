@@ -32,6 +32,7 @@ const CreateMessageInput: React.FC<Properties> = ({
       await dispatch(
         messageChatActions.createMessage({ chatId: roomId, text })
       );
+      setText('');
     },
     [dispatch, roomId, text]
   );

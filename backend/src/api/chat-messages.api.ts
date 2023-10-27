@@ -4,7 +4,11 @@ import express, {
   type Response,
 } from 'express';
 
-import { ChatMessageApiPath, HttpCode } from '@/common/enums/enums.js';
+import {
+  ChatMessageApiPath,
+  HttpCode,
+  SocketEvent,
+} from '@/common/enums/enums.js';
 import { chatMessagesService } from '@/services/services.js';
 
 const router = express.Router();
@@ -141,8 +145,9 @@ router.post(
   ChatMessageApiPath.INDEX,
   async (request: Request, response: Response, next: NextFunction) => {
     try {
-      const { body, userId } = request;
+      const { body, userId, io } = request;
       const message = await chatMessagesService.createChatMessage(body, userId);
+      io.emit(SocketEvent.NEW_ROOM_MESSAGE, { message });
       response.status(HttpCode.CREATED).send(message);
     } catch (error: unknown) {
       next(error);

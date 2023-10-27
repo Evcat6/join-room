@@ -1,6 +1,6 @@
 import { AuthApiPath, HttpMethod } from '@/common/enums/enums';
 import {
-  type UserLoadResponseDto,
+  type CurrentUserLoadResponseDto,
   type UserSignInRequestDto,
   type UserSignInResponseDto,
   type UserSignUpRequestDto,
@@ -42,10 +42,10 @@ class AuthApi extends AbstractApi {
       }
     );
 
-    return await response.json<UserSignUpResponseDto>();
+    return await response.json<UserSignInResponseDto>();
   }
 
-  public async load(): Promise<UserLoadResponseDto> {
+  public async load(): Promise<CurrentUserLoadResponseDto> {
     const response = await this.http.load(
       `${this.baseUrl}${this.path}${AuthApiPath.USER}`,
       {
@@ -54,7 +54,7 @@ class AuthApi extends AbstractApi {
       }
     );
 
-    return await response.json<UserLoadResponseDto>();
+    return await response.json<CurrentUserLoadResponseDto>();
   }
 }
 

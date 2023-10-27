@@ -2,9 +2,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { StorageKey } from '@/common/enums/storage-key.enum';
 import {
-  type UserLoadResponseDto,
+  type CurrentUserLoadResponseDto,
   type UserSignInRequestDto,
   type UserSignUpRequestDto,
+  type UserUpdateRequestDto,
 } from '@/common/types/types';
 
 import { type AsyncThunkConfig } from '../store';
@@ -22,7 +23,7 @@ const signUp = createAsyncThunk<
   storage.set(StorageKey.TOKEN, token);
 
   notification.success('You are successfully signed up');
-  await dispatch(loadUser());
+  await dispatch(load());
 });
 
 const signIn = createAsyncThunk<
@@ -37,11 +38,11 @@ const signIn = createAsyncThunk<
   storage.set(StorageKey.TOKEN, token);
 
   notification.success('You are successfully authorized');
-  await dispatch(loadUser());
+  await dispatch(load());
 });
 
-const loadUser = createAsyncThunk<
-  UserLoadResponseDto,
+const load = createAsyncThunk<
+  CurrentUserLoadResponseDto,
   undefined,
   AsyncThunkConfig
 >(ActionTypes.LOAD, async (_, { extra: { services } }) => {
@@ -49,4 +50,15 @@ const loadUser = createAsyncThunk<
   return await authApi.load();
 });
 
-export { loadUser, signIn, signUp };
+const update = createAsyncThunk<
+  CurrentUserLoadResponseDto,
+  UserUpdateRequestDto,
+  AsyncThunkConfig
+>(ActionTypes.UPDATE, async (payload, { extra: { services } }) => {
+  const { userApi, notification } = services;
+  const user = await userApi.updateOne(payload);
+  notification.success('data update successfully');
+  return user;
+});
+
+export { load, signIn, signUp, update };

@@ -5,8 +5,8 @@ import { InputType } from '@/common/enums/input-type.enum';
 import { useForm } from '@/common/hooks/hooks';
 import { type UserChatCreateRequestDto } from '@/common/types/types';
 import { CreateChatValidationSchema } from '@/common/validation-schemas/validation-schemas';
+import { BaseModal, FormButton, FormInput } from '@/components/components';
 
-import { BaseModal, FormButton, FormInput } from '../common/common';
 import styles from './styles.module.css';
 
 type Properties = {
@@ -15,7 +15,7 @@ type Properties = {
   onClose: () => void;
 };
 
-const CreateChatModal: React.FC<Properties> = ({ onSubmit, open, onClose }) => {
+const CreateRoomModal: React.FC<Properties> = ({ onSubmit, open, onClose }) => {
   const {
     register,
     handleSubmit,
@@ -53,4 +53,4 @@ const CreateChatModal: React.FC<Properties> = ({ onSubmit, open, onClose }) => {
   );
 };
 
-export { CreateChatModal };
+export { CreateRoomModal };

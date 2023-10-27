@@ -11,7 +11,7 @@ type Properties = {
   defaultBackgroundColor: string;
 };
 
-const ChatItem: React.FC<Properties> = ({
+const RoomItem: React.FC<Properties> = ({
   id,
   name,
   chatAvatarUrl,
@@ -31,4 +31,4 @@ const ChatItem: React.FC<Properties> = ({
   );
 };
 
-export { ChatItem };
+export { RoomItem };

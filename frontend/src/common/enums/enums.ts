@@ -13,5 +13,7 @@ export {
   HttpCode,
   HttpHeader,
   HttpMethod,
+  SocketEvent,
   UserChatsApiPath,
+  UsersApiPath,
 } from 'shared/build';

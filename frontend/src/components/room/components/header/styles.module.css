@@ -21,3 +21,7 @@
     align-items: center;
     width: 150px;
 }
+
+.ellipsisVertical {
+    cursor: pointer;
+}

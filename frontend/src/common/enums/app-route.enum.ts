@@ -5,6 +5,7 @@ enum AppRoute {
   HOME = '/home',
   HOME_$ROOM_ID = '/home/room/:roomId',
   ROOM_$ID = '/room/:roomId',
+  USER_PROFILE = '/user/profile',
 }
 
 export { AppRoute };

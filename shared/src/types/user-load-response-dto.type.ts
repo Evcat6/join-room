@@ -1,14 +1,12 @@
 type UserLoadResponseDto = {
   id: string;
   email: string;
-  firstName: string | null;
-  lastName: string | null;
-  userName: string;
-  phoneNumber: string | null;
-  birth: string | null;
-  passwordSalt: string;
-  passwordHash: string;
-  avatarUrl: string | null;
+  firstName?: string;
+  lastName?: string;
+  userName?: string;
+  phoneNumber?: string;
+  birth?: string;
+  avatarUrl?: string;
 };
 
 export { type UserLoadResponseDto };

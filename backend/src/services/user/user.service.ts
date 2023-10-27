@@ -2,7 +2,9 @@ import { UserEntity } from '@/common/entities/user.entity.js';
 import {
   type UserDeleteRequestDto,
   type UserDeleteResponseDto,
+  type UserLoadResponseDto,
   type UserSignUpRequestDto,
+  type UserUpdateRequestDto,
 } from '@/common/types/types.js';
 import { type UserRepository } from '@/repositories/user.repository.js';
 
@@ -44,11 +46,24 @@ class User {
     );
   }
 
+  public isFullyRegistered(payload: UserLoadResponseDto): boolean {
+    return Boolean(
+      payload.firstName && payload.email && payload.lastName && payload.userName
+    );
+  }
+
   public async delete(
     payload: UserDeleteRequestDto
   ): Promise<UserDeleteResponseDto> {
     const { id } = payload;
     return await this.userRepository.deleteOne(id);
+  }
+
+  public async updateOne(
+    id: string,
+    payload: UserUpdateRequestDto
+  ): Promise<UserEntity> {
+    return await this.userRepository.updateOne(id, payload);
   }
 }
 

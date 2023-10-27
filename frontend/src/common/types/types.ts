@@ -4,6 +4,7 @@ export {
   type ChatMessageCreateRequestDto,
   type ChatMessageCreateResponseDto,
   type ChatMessageGetResponseDto,
+  type CurrentUserLoadResponseDto,
   type UserChatCreateRequestDto,
   type UserChatCreateResponseDto,
   type UserChatGetResponseDto,
@@ -12,4 +13,5 @@ export {
   type UserSignInResponseDto,
   type UserSignUpRequestDto,
   type UserSignUpResponseDto,
+  type UserUpdateRequestDto,
 } from 'shared/build/index.js';

@@ -8,8 +8,10 @@ export {
   type UserChatCreateResponseDto,
   type UserDeleteRequestDto,
   type UserDeleteResponseDto,
+  type UserLoadResponseDto,
   type UserSignInRequestDto,
   type UserSignInResponseDto,
   type UserSignUpRequestDto,
   type UserSignUpResponseDto,
+  type UserUpdateRequestDto,
 } from 'shared/build';

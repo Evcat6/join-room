@@ -7,6 +7,7 @@ export { ExceptionName } from './exception-name.enum.js';
 export { HttpCode } from './http-code.enum.js';
 export { HttpHeader } from './http-header.enum.js';
 export { HttpMethod } from './http-method.enum.js';
+export { SocketEvent } from './socket-events.enum.js';
 export { UserChatsApiPath } from './user-chats-api-path.enum.js';
 export { UserChatValidationMessage } from './user-chats-validation-message.enum.js';
 export { UserValidationMessage } from './user-validation-message.enum.js';

@@ -7,9 +7,14 @@ import {
   useState,
 } from '@/common/hooks/hooks';
 import { type UserChatCreateRequestDto } from '@/common/types/types';
-import { ChatList, CreateChatModal, Room } from '@/components/components';
+import { Room } from '@/components/components';
 import { userChatsActions } from '@/store/actions';
 
+import {
+  CreateRoomButton,
+  CreateRoomModal,
+  RoomList,
+} from './components/components';
 import styles from './styles.module.css';
 
 const Home: React.FC = () => {
@@ -33,8 +38,9 @@ const Home: React.FC = () => {
   const onCreateChat = useCallback(
     async (payload: UserChatCreateRequestDto) => {
       await dispatch(userChatsActions.createChat(payload));
+      onClose();
     },
-    [dispatch]
+    [dispatch, onClose]
   );
 
   const { roomId } = useParams();
@@ -42,16 +48,18 @@ const Home: React.FC = () => {
     <main className={styles.pageContainer}>
       <div className={styles.container}>
         <aside className={styles.chatsContainer}>
-          <ChatList chatsArray={chats} />
+          <RoomList chatsArray={chats} />
+          <div className={styles.createChatButtonContainer}>
+            <CreateRoomButton onClick={onOpen} />
+          </div>
         </aside>
         {roomId && <Room roomId={roomId} />}
       </div>
-      <CreateChatModal
+      <CreateRoomModal
         onClose={onClose}
         open={isModalOpen}
         onSubmit={onCreateChat}
       />
-      <button onClick={onOpen}>create chat</button>
     </main>
   );
 };

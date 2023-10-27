@@ -62,7 +62,8 @@ class UserChats {
     const user = await this.userModel
       .query()
       .findById(userId)
-      .withGraphFetched('chats');
+      .withGraphFetched('chats')
+      .execute();
 
     if (user) {
       return user.chats.map((it) => ChatEntity.initialize(it));
@@ -79,7 +80,8 @@ class UserChats {
       .query()
       .findById(userId)
       .withGraphFetched('chats')
-      .first();
+      .first()
+      .execute();
 
     if (!user?.chats) {
       return undefined;

@@ -21,6 +21,23 @@ const config = ({ mode }: ConfigEnv): ReturnType<typeof defineConfig> => {
         },
       },
     },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('react')) {
+              return 'react';
+            }
+            if (id.includes('react-router-dom')) {
+              return 'react-router-dom';
+            }
+            if (id.includes('react-redux')) {
+              return 'react-redux';
+            }
+          },
+        },
+      },
+    },
   });
 };
 

@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IconNames } from '@/common/enums/icons-names.enum';
 
-import { BaseImg } from '../components';
+import { BaseImg } from '../../../components';
 import styles from './styles.module.css';
 
 type Properties = {
@@ -11,7 +11,7 @@ type Properties = {
   defaultColor: string;
 };
 
-const ChatHeader: React.FC<Properties> = ({
+const RoomHeader: React.FC<Properties> = ({
   chatAvatarUrl,
   name,
   defaultColor,
@@ -23,10 +23,13 @@ const ChatHeader: React.FC<Properties> = ({
         <span>{name}</span>
       </div>
       <div>
-        <FontAwesomeIcon icon={IconNames.ELLIPSIS_VERTICAL} />
+        <FontAwesomeIcon
+          className={styles.ellipsisVertical}
+          icon={IconNames.ELLIPSIS_VERTICAL}
+        />
       </div>
     </header>
   );
 };
 
-export { ChatHeader };
+export { RoomHeader };

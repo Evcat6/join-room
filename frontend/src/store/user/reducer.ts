@@ -1,14 +1,14 @@
 import { createReducer, isAnyOf } from '@reduxjs/toolkit';
 
 import { DataStatus } from '@/common/enums/data-status.enum';
-import { type UserLoadResponseDto } from '@/common/types/types';
+import { type CurrentUserLoadResponseDto } from '@/common/types/types';
 
-import { loadUser, signIn, signUp } from './actions';
+import { load, signIn, signUp, update } from './actions';
 
 type InitialState = {
   dataStatus: DataStatus;
   isUserLoaded: boolean;
-  user: UserLoadResponseDto;
+  user: CurrentUserLoadResponseDto;
 };
 
 const initialState: InitialState = {
@@ -17,39 +17,46 @@ const initialState: InitialState = {
   user: {
     id: '',
     email: '',
-    firstName: null,
-    lastName: null,
+    firstName: undefined,
+    lastName: undefined,
     userName: '',
     phoneNumber: null,
     birth: null,
-    passwordSalt: '',
-    passwordHash: '',
     avatarUrl: null,
+    isFullyRegistered: false,
   },
 };
 
 const reducer = createReducer(initialState, (builder) => {
-  builder.addCase(loadUser.fulfilled, (state, action) => {
-    state.user = action.payload;
-    state.isUserLoaded = true;
-  });
+  builder.addMatcher(
+    isAnyOf(load.fulfilled, update.fulfilled),
+    (state, action) => {
+      state.user = action.payload;
+      state.isUserLoaded = true;
+    }
+  );
 
   builder.addMatcher(
-    isAnyOf(signUp.pending, signIn.pending, loadUser.pending),
+    isAnyOf(signUp.pending, signIn.pending, load.pending, update.pending),
     (state) => {
       state.dataStatus = DataStatus.PENDING;
     }
   );
 
   builder.addMatcher(
-    isAnyOf(signUp.fulfilled, signIn.fulfilled, loadUser.fulfilled),
+    isAnyOf(
+      signUp.fulfilled,
+      signIn.fulfilled,
+      load.fulfilled,
+      update.fulfilled
+    ),
     (state) => {
       state.dataStatus = DataStatus.FULFILLED;
     }
   );
 
   builder.addMatcher(
-    isAnyOf(signUp.rejected, signIn.rejected, loadUser.rejected),
+    isAnyOf(signUp.rejected, signIn.rejected, load.rejected, update.rejected),
     (state) => {
       state.dataStatus = DataStatus.REJECTED;
     }

@@ -5,6 +5,8 @@ import express, {
 } from 'express';
 
 import { HttpCode, UserChatsApiPath } from '@/common/enums/enums.js';
+import { validateSchema } from '@/common/middlewares/middlewares.js';
+import { CreateChatValidationSchema } from '@/common/validation-schemas/validation-schemas.js';
 import { userChatsService } from '@/services/services.js';
 
 const router = express.Router();
@@ -143,6 +145,7 @@ router.get(
 
 router.post(
   UserChatsApiPath.INDEX,
+  validateSchema(CreateChatValidationSchema),
   async (request: Request, response: Response, next: NextFunction) => {
     try {
       const { userId, body } = request;

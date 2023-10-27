@@ -1,0 +1,5 @@
+const YELLOW_COLOR = '\u001B[33m';
+const ORANGE_COLOR = '\u001B[38;5;208m';
+const RESET_COLOR = '\u001B[0m';
+
+export { ORANGE_COLOR, RESET_COLOR, YELLOW_COLOR };
