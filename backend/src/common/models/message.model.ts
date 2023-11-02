@@ -19,7 +19,7 @@ class MessageModel extends Abstract {
       relation: Model.BelongsToOneRelation,
       modelClass: UserModel,
       join: {
-        from: 'messages.user_id',
+        from: 'messages.userId',
         to: 'users.id',
       },
     },

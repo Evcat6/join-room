@@ -40,10 +40,22 @@ class UserChats {
     return chat;
   }
 
+  private async hasUserChat(chatId: string, userId: string): Promise<boolean> {
+    const chat = await this.chatModel
+      .query()
+      .findById(chatId)
+      .where({ userId });
+    return Boolean(chat);
+  }
+
   public async joinUserChat(
     chatId: string,
     userId: string
   ): Promise<ChatEntity | undefined> {
+    const checkIsChatExist = await this.hasUserChat(chatId, userId);
+    if (checkIsChatExist) {
+      return;
+    }
     await this.addUserChat(chatId, userId);
     return await this.getOneUserChat(chatId, userId);
   }
@@ -92,6 +104,17 @@ class UserChats {
     }
 
     return undefined;
+  }
+
+  public async deleteOneUserChat(
+    chatId: string,
+    userId: string
+  ): Promise<number> {
+    return await this.chatModel
+      .query()
+      .findById(chatId)
+      .where({ chatAdminId: userId })
+      .delete();
   }
 }
 

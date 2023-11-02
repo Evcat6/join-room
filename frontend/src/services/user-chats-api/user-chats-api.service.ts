@@ -50,6 +50,18 @@ class UserChatsApi extends AbstractApi {
     );
     return response.json<UserChatGetResponseDto>();
   }
+
+  public async joinOne(chatId: string): Promise<UserChatGetResponseDto> {
+    const response = await this.http.load(
+      `${this.baseUrl}${this.path}/${chatId}`,
+      {
+        method: HttpMethod.POST,
+        hasAuth: true,
+      }
+    );
+
+    return response.json<UserChatGetResponseDto>();
+  }
 }
 
 export { UserChatsApi };

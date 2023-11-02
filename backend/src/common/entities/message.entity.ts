@@ -1,11 +1,24 @@
 import { type IEntity } from '@/common/interfaces/interfaces';
 
+import { UserEntity } from './user.entity.js';
+
 class MessageEntity implements IEntity {
   private 'id': string | null;
 
   private 'userId': string;
 
   private 'text'?: string;
+
+  private 'user'?: {
+    id: string;
+    firstName?: string;
+    lastName?: string;
+    userName?: string;
+    email: string;
+    phoneNumber?: string;
+    birth?: string;
+    avatarUrl?: string;
+  };
 
   private 'imageUrl'?: string;
 
@@ -20,6 +33,7 @@ class MessageEntity implements IEntity {
     imageUrl,
     createdAt,
     updatedAt,
+    user,
   }: {
     id: string | null;
     userId: string;
@@ -27,6 +41,16 @@ class MessageEntity implements IEntity {
     imageUrl?: string;
     createdAt: string | null;
     updatedAt: string | null;
+    user?: {
+      id: string;
+      firstName?: string;
+      lastName?: string;
+      userName?: string;
+      email: string;
+      phoneNumber?: string;
+      birth?: string;
+      avatarUrl?: string;
+    };
   }) {
     this.id = id;
     this.userId = userId;
@@ -34,6 +58,7 @@ class MessageEntity implements IEntity {
     this.imageUrl = imageUrl;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
+    this.user = user;
   }
 
   public static initialize({
@@ -43,6 +68,7 @@ class MessageEntity implements IEntity {
     imageUrl,
     createdAt,
     updatedAt,
+    user,
   }: {
     id: string | null;
     userId: string;
@@ -50,6 +76,18 @@ class MessageEntity implements IEntity {
     imageUrl?: string;
     createdAt: string;
     updatedAt: string;
+    user?: {
+      id: string;
+      firstName?: string;
+      lastName?: string;
+      userName?: string;
+      email: string;
+      phoneNumber?: string;
+      birth?: string;
+      passwordHash: string;
+      passwordSalt: string;
+      avatarUrl?: string;
+    };
   }): MessageEntity {
     return new MessageEntity({
       id,
@@ -58,6 +96,7 @@ class MessageEntity implements IEntity {
       imageUrl,
       createdAt,
       updatedAt,
+      user: user && UserEntity.initialize(user).toObject(),
     });
   }
 

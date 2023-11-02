@@ -3,6 +3,7 @@ import express, {
   type Request,
   type Response,
 } from 'express';
+import { HttpError } from 'shared/build';
 
 import { HttpCode, UserChatsApiPath } from '@/common/enums/enums.js';
 import { validateSchema } from '@/common/middlewares/middlewares.js';
@@ -184,7 +185,47 @@ router.post(
         params: { id: chatId },
       } = request;
       const chat = await userChatsService.joinChat(chatId, userId);
+      if (!chat) {
+        throw new HttpError({
+          status: HttpCode.BAD_REQUEST,
+          message: 'Room already joined',
+        });
+      }
       response.status(HttpCode.CREATED).send(chat);
+    } catch (error: unknown) {
+      next(error);
+    }
+  }
+);
+
+/**
+ * @swagger
+ * /api/user/chats/:id:
+ *   delete:
+ *     summary: removes chat
+ *     description: removes chat
+ *     security:
+ *       - BearerAuth: []
+ *     responses:
+ *       200:
+ *         description: return id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               $ref: '#/components/schemas/UserChatCreateResponseDto'
+ */
+
+router.delete(
+  UserChatsApiPath.$ID,
+  async (request: Request, response: Response, next: NextFunction) => {
+    try {
+      const {
+        userId,
+        params: { id: chatId },
+      } = request;
+      const chat = await userChatsService.deleteOneUserChat(chatId, userId);
+      response.status(HttpCode.OK).send(chat);
     } catch (error: unknown) {
       next(error);
     }

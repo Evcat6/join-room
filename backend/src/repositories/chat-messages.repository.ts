@@ -50,8 +50,9 @@ class ChatMessages {
     const chat = await this.chatModel
       .query()
       .findById(chatId)
-      .withGraphFetched('messages')
+      .withGraphFetched({ messages: { user: true } })
       .execute();
+
     return chat?.messages.map((it) => MessageEntity.initialize(it));
   }
 

@@ -36,4 +36,14 @@ const getChatById = createAsyncThunk<
   return await userChatsApi.getOne(roomId);
 });
 
-export { createChat, getAllChats, getChatById };
+const joinOneUserChatById = createAsyncThunk<
+  UserChatCreateResponseDto,
+  { roomId: string },
+  AsyncThunkConfig
+>(ActionTypes.JOIN_ONE_CHAT, async (payload, { extra: { services } }) => {
+  const { roomId } = payload;
+  const { userChatsApi } = services;
+  return await userChatsApi.joinOne(roomId);
+});
+
+export { createChat, getAllChats, getChatById, joinOneUserChatById };
