@@ -40,6 +40,13 @@ class UserChats {
   ): Promise<ChatEntity | undefined> {
     return await this.userChatsRepository.getOneUserChat(chatId, userId);
   }
+
+  public async deleteOneUserChat(
+    chatId: string,
+    userId: string
+  ): Promise<number> {
+    return await this.userChatsRepository.deleteOneUserChat(chatId, userId);
+  }
 }
 
 export { UserChats };
