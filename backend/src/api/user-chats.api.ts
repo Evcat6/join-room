@@ -3,9 +3,9 @@ import express, {
   type Request,
   type Response,
 } from 'express';
-import { HttpError } from 'shared/build';
 
 import { HttpCode, UserChatsApiPath } from '@/common/enums/enums.js';
+import { HttpError } from '@/common/exceptions/exceptions.js';
 import { validateSchema } from '@/common/middlewares/middlewares.js';
 import { CreateChatValidationSchema } from '@/common/validation-schemas/validation-schemas.js';
 import { userChatsService } from '@/services/services.js';
